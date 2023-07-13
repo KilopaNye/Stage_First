@@ -72,7 +72,7 @@ function calculateSumOfBonus(data) {
             total += 500;
         } else if (role === "CEO") {
             total += 1000;
-        } else if(role === "Sales"){
+        } else if (role === "Sales") {
             total += 300;
         };
         //判別加成-工作表現
@@ -80,7 +80,7 @@ function calculateSumOfBonus(data) {
             total += 800;
         } else if (performance === "average") {
             total += 400;
-        } else if(performance === "below average"){
+        } else if (performance === "below average") {
             continue;
         };
     };
@@ -153,11 +153,11 @@ function getNumber(index) {
         answer = index / 2;
         answer += index;
         console.log(answer);
-    }else{
-        nums = index+1;
-        num=nums/2;
-        nums+=num;
-        nums+=1;
+    } else {
+        nums = index + 1;
+        num = nums / 2;
+        nums += num;
+        nums += 1;
         console.log(Number(nums))
     };
 };
