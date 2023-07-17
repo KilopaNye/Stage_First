@@ -113,21 +113,21 @@ console.log("=================Task03==================")
 
 function func(...data) {
     let middle_names = []
-    let name = ""
-    let axix = 0    //判斷是否要打印"沒有" 假如有打印過資料，則+1，就不會觸發最後的判斷式。
+    let name = "";
+    let axix = 0;    //判斷是否要打印"沒有" 假如有打印過資料，則+1，就不會觸發最後的判斷式。
     for (let i = 0; i < data.length; i++) {
-        name = data[i][1]
-        middle_names.push(name)
+        name = data[i][1];
+        middle_names.push(name);
     };
     for (let i = 0; i < data.length; i++) {
         let freq = 0;
         name = data[i][1]
         for (let i = 0; i < middle_names.length; i++)
             if (name === middle_names[i]) {
-                freq += 1
+                freq += 1;
             };
         if (freq < 2) {
-            console.log(data[i])
+            console.log(data[i]);
             axix += 1;            //axix+=1避免觸發""
         }
     };
@@ -176,7 +176,7 @@ function findIndexOfCar(seats, status, number) {
     }
     // console.log(Math.min(serve_seats))
     let member = Math.min(...serve_seats); //找到提供服務的車廂最小值 使用展開運算符展開陣列
-    console.log(seats.indexOf(member))     //#打印最小值車廂的位置，沒有的話會回傳-1
+    console.log(seats.indexOf(member));     //#打印最小值車廂的位置，沒有的話會回傳-1
 }
 findIndexOfCar([3, 1, 5, 4, 2], [0, 1, 0, 1, 1], 2); // print 4
 findIndexOfCar([1, 0, 5, 1, 3], [0, 1, 0, 1, 1], 4); // print -1
