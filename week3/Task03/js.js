@@ -25,6 +25,9 @@ window.onload = function () {//當載入網頁後執行函式
     window.addEventListener('resize', resize, false);	// 持續偵聽事件 resize
 };
 
+
+// ------------------------星星的函式-------------------------------
+
 // let star = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 // function gray(number) {
 //     let gray = document.querySelector(".gray-" + number);/*選取要操作的標籤，從0開始*/
@@ -66,9 +69,9 @@ fetch("https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assi
 
     };
     for (let i = 4; i < 16; i++) {
+        //選擇父層
         let second = document.querySelector(".box" + i);
         let fragmentSecond = document.createDocumentFragment();
-
         // 照片區塊、以及整理網址
         let httpConnect = String(data["result"]["results"][i]["file"]);
         // 因為有結尾是大寫JPG，因此使用判斷式進行篩選
@@ -89,7 +92,14 @@ fetch("https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assi
             fragmentSecond.appendChild(img2);
             second.appendChild(fragmentSecond);
         };
-        //文字
+        //------------------------------以下為欲新增的標籤---------------------------------
+        //添加文字BOX
+        let opacityDiv = document.createElement("div");
+        opacityDiv.classList.add("opacity","num"+i);
+        fragmentSecond.appendChild(opacityDiv);
+        second.appendChild(fragmentSecond);
+
+        //建立BOX內文字，以及添加class
         let secondText = document.querySelector(".num" + i);
         let div = document.createElement("div");
         div.classList.add("photoTxt2");
@@ -99,7 +109,7 @@ fetch("https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assi
     };
 });
 
-// 參考框架
+// 參考架構
     // <div class="secondPhoto" >
     //         <img src="image/food.jpg" class="img2">
     //         <div class="opacity">
