@@ -2,6 +2,8 @@ import bs4
 import urllib.request as req
 import csv
 
+
+#進入文章讀取Po文時間，並return抓取到的時間資料。
 def getTime(TimeUrl):
     requests = req.Request(
         TimeUrl,
@@ -11,7 +13,7 @@ def getTime(TimeUrl):
     )
     with req.urlopen(requests) as response:
         data = response.read().decode("utf-8")
-
+#解析html文件
     TimeRoot = bs4.BeautifulSoup(data, "html.parser")
     shareTimeBox = TimeRoot.find_all("span", class_="article-meta-value")
     return  shareTimeBox[3].string

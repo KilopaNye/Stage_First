@@ -59,7 +59,6 @@ fetch("https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assi
         img.classList.add("img");  //新增圖片class
         // 先將東西加到fragment階層，後面再一次把全部的fragment加到first階層中。
         fragment.appendChild(img);
-
         // 文字方塊生成
         let div = document.createElement("div");
         div.classList.add("photoTxt");
@@ -124,8 +123,8 @@ let MaxUp = function () {
     fetch("https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assignment.json").then(function (response) {
         return response.json();
     }).then(function (data) {
-        console.log(maxPo)
-        console.log(photoMax)
+        console.log(maxPo);
+        console.log(photoMax);
         for (let i = maxPo; i < photoMax; i++) {
             //選擇父層
             let subs;
@@ -138,7 +137,7 @@ let MaxUp = function () {
             let fragmentSecond = document.createDocumentFragment();
             // 照片區塊、以及整理網址
             let httpConnect = String(data["result"]["results"][i]["file"]);
-
+            
             let img2 = document.createElement("img");
             subs = httpConnect.split("https");  //分割網址
             img2.src = "https"+subs[1];
