@@ -22,7 +22,7 @@ def signin():
     count=request.form["count"]
     password=request.form["password"]
     if count!=My_count or password!=My_password:
-        return redirect("/error")
+        return redirect("/error?message=帳號、或密碼錯誤")
     elif len(count)>0:
         session["username"]="test"
         return redirect("/member")
@@ -40,7 +40,7 @@ def member():
 # 錯誤頁面導向
 @app.route("/error")
 def error():
-    message=request.args.get("message","帳號、或密碼錯誤")
+    message=request.args.get("message","發生意外的錯誤")
     return render_template("error.html",message=message)
 
 #登出
