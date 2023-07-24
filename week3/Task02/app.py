@@ -18,7 +18,7 @@ def getTime(TimeUrl):
     shareTimeBox = TimeRoot.find_all("span", class_="article-meta-value")
     return  shareTimeBox[3].string
 
-
+#進入網頁讀取每篇文章標頭。
 def getPage(url):
     with open("attraction.csv", mode="a", newline="", encoding="utf-8") as attraction:
         writer = csv.writer(attraction)

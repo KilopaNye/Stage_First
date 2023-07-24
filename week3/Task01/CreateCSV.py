@@ -51,6 +51,7 @@ with open("mrt.csv", mode="r", newline="", encoding="utf-8") as mrt:
             # 將沒有捷運站的景點剔除
             if bool(writer[i][0]) != False:
                 if writer[i][0] != writer[i - 1][0]:
+                    #判斷是空值，空的話第一圈先不印入資料，避免第一圈就先打印一行空資料。
                     if len(answer) >= 1:
                         data.writerow(answer)
                     answer = writer[i][0], writer[i][1]
