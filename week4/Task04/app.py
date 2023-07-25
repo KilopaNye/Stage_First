@@ -3,7 +3,7 @@ from flask import request
 from flask import render_template
 from flask import redirect
 from flask import session
-
+from flask import url_for
 app=Flask(__name__,static_folder="public",static_url_path="/")#代表目前執行的目錄
 # 設置密鑰
 app.secret_key="i am very secret"
@@ -29,6 +29,7 @@ def signin():
         session["username"]="test"
         return redirect("/member")
 
+
 #先驗證是否有先登入才導至會員頁面
 @app.route("/member")
 def member():
@@ -42,6 +43,13 @@ def member():
 def error():
     message=request.args.get("message","發生意外的錯誤")
     return render_template("error.html",message=message)
+
+#計算頁面
+@app.route("/square/<input>")
+def square(input):
+    num=int(input)
+    squared_num = num*num
+    return render_template("square.html", answer=squared_num, num=num)
 
 #登出
 @app.route("/signout")

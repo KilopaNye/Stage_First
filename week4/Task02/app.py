@@ -14,16 +14,18 @@ My_password = "test"
 def home():
     return render_template("public.html")
 
+# 登入用表單，並且驗證
 @app.route("/signin" ,methods=["POST"])
 def signin():
     count=request.form["count"]
     password=request.form["password"]
-    if count!=My_count or password!=My_password:
+    if len(count)<1:
+        return redirect("/error?message=請輸入使用者名稱和密碼")
+    elif count!=My_count or password!=My_password:
         return redirect("/error?message=帳號、或密碼錯誤")
     elif len(count)>0:
-        return render_template("member.html")
-    else:
-        return redirect("/error?message=請輸入使用者名稱和密碼")
+        session["username"]="test"
+        return redirect("/member")
 
 
 @app.route("/error")
