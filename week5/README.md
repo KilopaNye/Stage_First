@@ -22,7 +22,8 @@ SELECT * FROM member;
 mysql> select * from member order by time desc;
 ```
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/cfc31cd3-5125-4857-b079-e0015d57e3a4/Untitled.png)
+![image](https://github.com/KilopaNye/Stage_First/assets/98875404/a42ed2dc-09ce-48ed-ae6b-dd4d49712dbd)
+
 
 取得排序後的指定範圍資料:
 
