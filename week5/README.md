@@ -13,7 +13,8 @@ Query OK, 1 row affected (0.00 sec)
 SELECT * FROM member;
 ```
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/afb54de2-12f7-46c3-bc6c-a7266c9959c0/Untitled.png)
+![image](https://github.com/KilopaNye/Stage_First/assets/98875404/7bd87b24-17b5-4730-8315-496efa2a3a7b)
+
 
 由近到遠排序:
 
