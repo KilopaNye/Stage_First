@@ -1,9 +1,9 @@
 function GoForm(){
-    document.querySelector(".login-form").onsubmit = function(){
+    document.querySelector(".login-form").onsubmit = function(event){
         let checkbox = document.querySelector(".agree-check")
         if(!checkbox.checked){
             alert('請先閱讀同意條款並打勾確認');
-            return false; // 阻止表單提交
+            event.preventDefault(); // 阻止表單提交
         }
     }
 }
