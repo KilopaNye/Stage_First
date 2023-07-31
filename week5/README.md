@@ -31,7 +31,8 @@ mysql> select * from member order by time desc;
 mysql> select * from member order by time desc limit 1,4;
 ```
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/be400602-2c91-404b-b4b7-139b3a0b09d3/Untitled.png)
+![image](https://github.com/KilopaNye/Stage_First/assets/98875404/ee9f9229-d8c0-4fad-ba01-41e2c9671ea0)
+
 
 取得username為’test’的資料:
 
@@ -39,7 +40,8 @@ mysql> select * from member order by time desc limit 1,4;
 mysql> select * from member where username='test';
 ```
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/dedd2ef7-2b22-4f69-ade6-0fde50ed29cc/Untitled.png)
+![image](https://github.com/KilopaNye/Stage_First/assets/98875404/5c50c537-3179-4143-8599-d3394d794d9f)
+
 
 取得username為’test’ 且 password為’test’的資料:
 
@@ -47,7 +49,8 @@ mysql> select * from member where username='test';
 mysql> select * from member where username='test' and password='test';
 ```
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9c2a4cc3-61e6-4b29-a203-81ec053b1082/Untitled.png)
+![image](https://github.com/KilopaNye/Stage_First/assets/98875404/c6bbde89-58f1-4e5d-9fa1-db1b0234328f)
+
 
 修改username為test的資料名稱 name=test2
 
@@ -55,7 +58,8 @@ mysql> select * from member where username='test' and password='test';
 mysql> update member set name='test2' where username='test';
 ```
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/65507d6b-ac93-48ee-b01b-598543fa41dd/Untitled.png)
+![image](https://github.com/KilopaNye/Stage_First/assets/98875404/5889e840-cfba-47db-b543-5abd74132c7e)
+
 
 ---
 
@@ -65,7 +69,8 @@ mysql> update member set name='test2' where username='test';
 mysql> SELECT count(*) from member;
 ```
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/adcb1d12-c45a-456a-8b0e-67c7aca72ba7/Untitled.png)
+![image](https://github.com/KilopaNye/Stage_First/assets/98875404/7908d0ce-07af-4104-bab9-1102972bd1b7)
+
 
 取得 member 資料表中，所有會員 follower_count 欄位的總和。
 
@@ -74,7 +79,8 @@ mysql> select sum(follower_count) as 總和 from member;
 
 ```
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ea6e9ed6-cbaa-4bea-9ba9-d1ae900dc1f8/Untitled.png)
+![image](https://github.com/KilopaNye/Stage_First/assets/98875404/5f0c7bd4-7bfd-4d1f-bce9-533ad8252968)
+
 
 取得 member 資料表中，所有會員 follower_count 欄位的平均數。
 
@@ -82,7 +88,8 @@ mysql> select sum(follower_count) as 總和 from member;
 mysql> select avg(follower_count) as 平均 from member;
 ```
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ac996ca4-3637-47dc-a904-52313fe16cb5/Untitled.png)
+![image](https://github.com/KilopaNye/Stage_First/assets/98875404/c654fd39-dcc0-4883-a316-6c3d80d69f03)
+
 
 ---
 
@@ -100,7 +107,8 @@ mysql> CREATE TABLE message(
 );
 ```
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8227d92c-8a69-417c-9b4b-da1bd48773f9/Untitled.png)
+![image](https://github.com/KilopaNye/Stage_First/assets/98875404/d7e39953-a03e-40dd-83e3-12feef83cdf8)
+
 
 使⽤ SELECT 搭配 JOIN 語法，取得所有留⾔，結果須包含留⾔者的姓名。
 
@@ -108,7 +116,8 @@ mysql> CREATE TABLE message(
 mysql> select name,content from member inner join message on member.id=message.member_id;
 ```
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/bc64ebbd-cceb-4f36-871e-308c83c7e476/Untitled.png)
+![image](https://github.com/KilopaNye/Stage_First/assets/98875404/5daddfe5-1038-48e3-a78c-6d89be539ebf)
+
 
 使⽤ SELECT 搭配 JOIN 語法，取得 member 資料表中欄位 username 是 test 的所有
 留⾔，資料中須包含留⾔者的姓名。
@@ -117,7 +126,8 @@ mysql> select name,content from member inner join message on member.id=message.m
 mysql> select name,content from member inner join message on member.id=message.member_id where username='test';
 ```
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8f5fde6c-b2cc-4165-9f11-c21b26f1fe37/Untitled.png)
+![image](https://github.com/KilopaNye/Stage_First/assets/98875404/b641635b-4130-477d-8612-ab88975ae59c)
+
 
 使⽤ SELECT、SQL Aggregate Functions 搭配 JOIN 語法，取得 member 資料表中
 欄位 username 是 test 的所有留⾔平均按讚數。
@@ -126,4 +136,5 @@ mysql> select name,content from member inner join message on member.id=message.m
 mysql> select name,avg(like_count) as 留言平均按讚數 from member inner join message on member.id=message.member_id where username='test' group by message.member_id;
 ```
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/bf2252b0-d4cd-40ed-aac9-d0c802ba9d13/Untitled.png)
+![image](https://github.com/KilopaNye/Stage_First/assets/98875404/90d4b566-788a-4bcd-b87c-568cfe527e04)
+
