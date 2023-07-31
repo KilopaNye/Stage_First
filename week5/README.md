@@ -64,7 +64,7 @@ mysql> update member set name='test2' where username='test';
 ---
 
 ### 要求四:
-
+取得 member 資料表中，總共有幾筆資料 ( 幾位會員 )。
 ```sql
 mysql> SELECT count(*) from member;
 ```
