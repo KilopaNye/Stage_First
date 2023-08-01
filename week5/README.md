@@ -16,7 +16,8 @@ SELECT * FROM member;
 ![image](https://github.com/KilopaNye/Stage_First/assets/98875404/7bd87b24-17b5-4730-8315-496efa2a3a7b)
 
 
-由近到遠排序:
+使⽤ SELECT 指令取得所有在 member 資料表中的會員資料，並按照 time 欄位，由
+近到遠排序。
 
 ```sql
 mysql> select * from member order by time desc;
@@ -25,13 +26,15 @@ mysql> select * from member order by time desc;
 ![image](https://github.com/KilopaNye/Stage_First/assets/98875404/a42ed2dc-09ce-48ed-ae6b-dd4d49712dbd)
 
 
-取得排序後的指定範圍資料:
+使⽤ SELECT 指令取得 member 資料表中第 2 到第 4 筆共三筆資料，並按照 time 欄
+位，由近到遠排序。( 並非編號 2、3、4 的資料，⽽是排序後的第 2 ~ 4 筆資料 )
 
 ```sql
-mysql> select * from member order by time desc limit 1,4;
+mysql> select * from member order by time desc limit 1,3;
 ```
 
-![image](https://github.com/KilopaNye/Stage_First/assets/98875404/ee9f9229-d8c0-4fad-ba01-41e2c9671ea0)
+![image](https://github.com/KilopaNye/Stage_First/assets/98875404/bcdfddd5-6c02-4c48-9ac3-a24623db39fc)
+
 
 
 取得username為’test’的資料:
@@ -105,6 +108,9 @@ mysql> CREATE TABLE message(
     like_count int unsigned default '0' not null ,
     time DATETIME NOT NULL DEFAULT NOW()
 );
+
+添加外鍵
+mysql> alter table message add foreign key (member_id) references member(id);
 ```
 
 ![image](https://github.com/KilopaNye/Stage_First/assets/98875404/d7e39953-a03e-40dd-83e3-12feef83cdf8)
