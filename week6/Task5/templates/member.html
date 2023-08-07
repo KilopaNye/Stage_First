@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+    <script src="{{ url_for('static', filename='submit.js') }}"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <div class="login-box">
+            <div class="flex-box">
+                <div class="form-box">
+                    <div class="welcome-board">歡迎光臨，這是會員頁</div>
+                    <div class="box">{{username}},歡迎登入系統</div>
+                    <div class="logout"><a href="/signout">登出系統</a></div>
+                    <hr>
+                <form class="create-message" action="/createMessage" method="POST">
+                    <div class="login-title">快來留言吧</div>
+                    <span class="login-text ">內容</span><input type="text" class="box-margin cal-text" name="message" placeholder="請輸入內容"><br />
+                    <button onclick="GoCal();" class="login-icon">送出</button>
+                </form>
+                    <hr>
+                </div>
+                <div class="form-box" id="message" >
+                    {% for item in data %}
+                    <p>{{ item[0] }}: {{ item[1] }}<br></p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<!-- <form class="login-form" action="/signin" method="POST">
+    <span class="login-text">帳號</span><input type="text" class="box-margin" name="count" placeholder="請輸入帳號"><br />
+    <span class="login-text">密碼</span><input type="password" class="box-margin" name="password" placeholder="請輸入密碼" /><br />
+    <span class="login-text">同意條款</span><input type="checkbox" class="agree-check" /><br />
+    <button onclick="GoForm();" class="login-icon">登入</button>
+</form> -->
