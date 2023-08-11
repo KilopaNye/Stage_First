@@ -27,7 +27,7 @@ def signup():
     count_name = request.form["count_name"]
     user_count = request.form["user_count"]
     password = request.form["password"]
-    username = (user_count,)  # 將資料轉為tuple才可被SQL語法操作
+    username = (user_count,) 
     cursor.execute("select username from member where username = %s", (username))
     data = cursor.fetchone()
     if data:
@@ -39,7 +39,8 @@ def signup():
         cursor.execute("select * from member where username=%s", (username))
         data = cursor.fetchone()
         session["username"] = count_name
-        session["id"] = data["name"]
+        session["id"] = data["id"]
+        session["name"] = data["name"]
         return redirect("/member")
 
 
