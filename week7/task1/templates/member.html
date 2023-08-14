@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+    <script src="{{ url_for('static', filename='submit.js') }}"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="welcome-board">歡迎光臨，這是會員頁</div>
+    <div class="height"></div>
+    <div class="login-box">
+        <div class="flex-box">
+            <div class="form-box">
+                <div class="box" id="newName">{{username}},歡迎登入系統</div>
+                <div class="logout"><a href="/signout">登出系統</a></div>
+                <hr>
+                <div class="box">查詢會員姓名</div>
+                <span class="login-text ">內容</span><input type="text" class="box-margin" id="GoSearch"
+                    placeholder="請輸入帳號"><br />
+                <button onclick="GoSearch();" class="login-icon">送出</button>
+                <div class="box-height" id="search_result"></div>
+                <hr />
+                <div class="box">更新會員姓名</div>
+                <span class="login-text ">內容</span><input type="text" class="box-margin" id="rename"
+                    placeholder="請輸入新名稱"><br />
+                <button onclick="GoRename();" class="login-icon">送出</button>
+                <div class="box-height" id="rename_result"></div>
+                <hr />
+                <form class="create-message" action="/createMessage" method="POST">
+                    <div class="login-title">快來留言吧</div>
+                    <span class="login-text ">內容</span><input type="text" class="box-margin cal-text" name="message"
+                        placeholder="請輸入內容"><br />
+                    <button onclick="GoCal();" class="login-icon">送出</button>
+                </form>
+                <hr />
+            </div>
+
+            <div class="form-scroll" id="message">
+                {% for item in data %}
+                <p>{{ item.name }}:{{ item.content }}
+                    {% if item.name == username %}
+                    <span><span class="hidden">{{ item.id }}</span><button class="delMessage"
+                            onclick="delMessage(this);">X</button></span><br>
+                </p>
+                {% endif %}
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

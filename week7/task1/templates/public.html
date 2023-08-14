@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+    <script src="{{ url_for('static', filename='submit.js') }}"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="welcome-board">歡迎光臨，請輸入帳號密碼</div>
+    <div class="form-box">
+        <div class="login-title">註冊帳號</div>
+        <form class="signup-form" action="/signup" method="POST">
+            <span class="login-text">姓名</span><input type="text" class="box-margin" name="count_name" id="count_name"
+                placeholder="請輸入姓名"><br />
+            <span class="login-text">帳號</span><input type="text" class="box-margin" name="user_count" id="user_count"
+                placeholder="請輸入帳號"><br />
+            <span class="login-text">密碼</span><input type="password" class="box-margin" name="password" id="password"
+                placeholder="請輸入密碼" /><br />
+            <button onclick="GoForm();" class="login-icon">註冊</button>
+        </form>
+        <hr>
+        <div class="login-title">登入系統</div>
+        <form class="login-form" action="/signin" method="POST">
+            <span class="login-text">帳號</span><input type="text" class="box-margin" name="count" id="login-count"
+                placeholder="請輸入帳號"><br />
+            <span class="login-text">密碼</span><input type="password" class="box-margin" name="password"
+                id="login-password" placeholder="請輸入密碼" /><br />
+            <button onclick="signin();" class="login-icon">登入</button>
+        </form>
+    </div>
+</body>
+
+</html>
