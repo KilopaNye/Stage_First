@@ -133,13 +133,14 @@ def search(username):
     con=cnxpool.get_connection()
     cursor = con.cursor(dictionary=True)
     try:
-        cursor.execute("select id,name,username from member where username=%s",(username,))
-        data=cursor.fetchone()
-        print(data)
-        if data is not None:
-            return {"data": data}
-        else:
-            return {"data" : None}
+        if "username" in session:
+            cursor.execute("select id,name,username from member where username=%s",(username,))
+            data=cursor.fetchone()
+            print(data)
+            if data is not None:
+                return {"data": data}
+            else:
+                return {"data" : None}
     finally:
         cursor.close()
         con.close()
@@ -148,19 +149,20 @@ def search(username):
 def update():
     con=cnxpool.get_connection()
     cursor = con.cursor(dictionary=True)
-    username=session["username"]
-    try:
-        data=request.get_json()
-        text=data.get("name")
-        cursor.execute("update member set name=%s where username=%s",(text,username,))
-        con.commit()
-        session["name"]=text
-        return jsonify({"ok": True})
-    except:
-        return jsonify({"error": True})
-    finally:
-        cursor.close()
-        con.close()
+    if "username" in session:
+        try:
+            username=session["username"]
+            data=request.get_json()
+            text=data.get("name")
+            cursor.execute("update member set name=%s where username=%s",(text,username,))
+            con.commit()
+            session["name"]=text
+            return jsonify({"ok": True})
+        except:
+            return jsonify({"error": True})
+        finally:
+            cursor.close()
+            con.close()
 
 # 錯誤頁面導向
 @app.route("/error")
