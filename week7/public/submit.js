@@ -30,7 +30,6 @@ function delMessage(button) {
         let textContent = paragraph.textContent.trim();
         let textCut = textContent.substring(0, textContent.length - 1); //去掉按鈕中的"X"
         console.log("要刪除的文字：" + textCut);
-
         let headers={
             "Content-Type": "application/json",
         };
@@ -49,12 +48,11 @@ function delMessage(button) {
 
 function GoSearch(){
     let username=document.querySelector("#GoSearch").value;
-    fetch(`/api/member/${ username }`).then(response => {
+    fetch(`/api/member?username=${ username }`).then(response => {
         return response.json();
     }).then(data => {
-        console.log(data.data["username"]);
         let search_result = document.querySelector("#search_result");
-        if(data.data.username==null){
+        if(data.data==null){
             search_result.innerHTML="找不到該對象";
         }else{
             search_result.innerHTML=`${ data.data.name } (${ data.data.username })`

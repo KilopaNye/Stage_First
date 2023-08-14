@@ -10,7 +10,15 @@ import mysql.connector
 app = Flask(__name__, static_folder="public", static_url_path="/")
 app.secret_key = "WGXaTKE7JR9MzzykHVp1O8ix7cnkx5eOb400I5gPxXJI3I8saAUWZjDLxs6056M"
 
-cnxpool = mysql.connector.pooling.MySQLConnectionPool(user="root", password="root123", host="localhost", database="website",pool_name="mypool",pool_size=5)
+cnxpool = mysql.connector.pooling.MySQLConnectionPool(
+    user="root",
+    password="root123",
+    host="localhost",
+    database="website",
+    pool_name="mypool",
+    pool_size=5,
+)
+
 
 # 首頁
 @app.route("/")
@@ -26,16 +34,18 @@ def signup():
     user_count = request.form["user_count"]
     password = request.form["password"]
     try:
-        con=cnxpool.get_connection()
+        con = cnxpool.get_connection()
         cursor = con.cursor(dictionary=True)
-        username = (user_count,) 
+        username = (user_count,)
         cursor.execute("select username from member where username = %s", (username))
         data = cursor.fetchone()
         if data:
             return redirect("/error?message=帳號已經被註冊")
         else:
             cursor.execute(
-                "insert into member(name, username, password) values(%s, %s, %s )",(count_name, user_count, password))
+                "insert into member(name, username, password) values(%s, %s, %s )",
+                (count_name, user_count, password),
+            )
             con.commit()
             cursor.execute("select * from member where username=%s", (username))
             data = cursor.fetchone()
@@ -48,18 +58,19 @@ def signup():
         con.close()
 
 
-
 # 登入用表單，並且驗證
 @app.route("/signin", methods=["POST"])
 def signin():
-    con=cnxpool.get_connection()
+    con = cnxpool.get_connection()
     cursor = con.cursor(dictionary=True)
     try:
         count = request.form["count"]
         password = request.form["password"]
         # username=(count,) #將資料轉為tuple才可被SQL語法操作
         cursor.execute(
-            "select id,name,username,password from member where username = %s and password = %s ",(count, password))
+            "select id,name,username,password from member where username = %s and password = %s ",
+            (count, password),
+        )
         data = cursor.fetchone()
         if data:
             print(data["id"])
@@ -73,11 +84,12 @@ def signin():
         cursor.close()
         con.close()
 
+
 @app.route("/createMessage", methods=["POST"])
 def createMessage():
     if "username" in session:
         message = request.form["message"]
-        con=cnxpool.get_connection()
+        con = cnxpool.get_connection()
         cursor = con.cursor(dictionary=True)
         try:
             input_message = message
@@ -99,10 +111,12 @@ def createMessage():
 @app.route("/member")
 def member():
     if "username" in session:
-        con=cnxpool.get_connection()
+        con = cnxpool.get_connection()
         cursor = con.cursor(dictionary=True)
         try:
-            cursor.execute("select message.id,name,content,message.time from member inner join message on member.id=message.member_id order by message.time desc")
+            cursor.execute(
+                "select message.id,name,content,message.time from member inner join message on member.id=message.member_id order by message.time desc"
+            )
             data = cursor.fetchall()
             usernames = session["name"]
             return render_template("member.html", username=usernames, data=data)
@@ -115,48 +129,59 @@ def member():
 
 @app.route("/deleteMessage", methods=["POST"])
 def deleteMessage():
-    con=cnxpool.get_connection()
+    con = cnxpool.get_connection()
     cursor = con.cursor(dictionary=True)
     try:
-        data=request.get_json()
-        text=data.get("text")
-        text=(text,)
-        cursor.execute("delete from message where id=%s",(text))
+        data = request.get_json()
+        text = data.get("text")
+        text = (text,)
+        cursor.execute("delete from message where id=%s", (text))
         con.commit()
         return jsonify({"message": "資料刪除成功"})
     finally:
         cursor.close()
         con.close()
 
-@app.route("/api/member/<username>")
-def search(username):
-    con=cnxpool.get_connection()
-    cursor = con.cursor(dictionary=True)
-    try:
-        if "username" in session:
-            cursor.execute("select id,name,username from member where username=%s",(username,))
-            data=cursor.fetchone()
-            print(data)
-            if data is not None:
-                return {"data": data}
-            else:
-                return {"data" : None}
-    finally:
-        cursor.close()
-        con.close()
 
-@app.route("/api/member", methods=["PATCH"])
-def update():
-    con=cnxpool.get_connection()
+@app.route("/api/member", methods=["GET"])
+def search():
+    username = request.args.get("username")
+    con = cnxpool.get_connection()
     cursor = con.cursor(dictionary=True)
     if "username" in session:
         try:
-            username=session["username"]
-            data=request.get_json()
-            text=data.get("name")
-            cursor.execute("update member set name=%s where username=%s",(text,username,))
+            cursor.execute(
+                "select id,name,username from member where username=%s", (username,)
+            )
+            data = cursor.fetchone()
+            print(data)
+            if data is not None:
+                return jsonify({"data": data})
+            else:
+                return jsonify({"data": None})
+        finally:
+            cursor.close()
+            con.close()
+
+
+@app.route("/api/member", methods=["PATCH"])
+def update():
+    con = cnxpool.get_connection()
+    cursor = con.cursor(dictionary=True)
+    if "username" in session:
+        try:
+            username = session["username"]
+            data = request.get_json()
+            text = data.get("name")
+            cursor.execute(
+                "update member set name=%s where username=%s",
+                (
+                    text,
+                    username,
+                ),
+            )
             con.commit()
-            session["name"]=text
+            session["name"] = text
             return jsonify({"ok": True})
         except:
             return jsonify({"error": True})
@@ -164,11 +189,13 @@ def update():
             cursor.close()
             con.close()
 
+
 # 錯誤頁面導向
 @app.route("/error")
 def error():
     message = request.args.get("message", "發生意外的錯誤")
     return render_template("error.html", message=message)
+
 
 # 登出
 @app.route("/signout")
